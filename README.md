@@ -1,3 +1,14 @@
+Context
+=======
+
+This is an assignment project from Coursera C++ course.
+This repository implements a graph data structure along with some accompanying classes.
+
+Here I choose to implement edge list version of a graph implementaiton as this gives me a chance to explore OOP with C++.
+In addition edge list version could be more efficient with low density graphs.
+
+Below is the assignment text from the course.
+
 Dijkstra's Algorithm
 ====================
 
