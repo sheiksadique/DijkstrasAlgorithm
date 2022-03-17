@@ -24,6 +24,7 @@ public:
     void add(Node& y);
     void del(Node& y);
     bool adjacent(Node& y);
+    Edge & getEdge(Node& y);
 
     friend ostream &operator<<(ostream &os, const Node &node);
 

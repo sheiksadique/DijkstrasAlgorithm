@@ -64,4 +64,10 @@ const list<Edge> &Node::getEdges() const {
     return edges;
 }
 
+Edge &Node::getEdge(Node &y) {
+    for (Edge e: edges){
+        if (e.destination == &y) return e;
+    }
+}
+
 

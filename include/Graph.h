@@ -36,13 +36,13 @@ public:
     //removes the edge from x to y, if it is there.
     void del (Node& x, Node& y);
     // returns the value associated with the node x.
-    int get_node_value (Node x);
+    int get_node_value (Node& x);
     //sets the value associated with the node x to a.
-    void set_node_value(Node x, int a);
+    void set_node_value(Node& x, int a);
     // returns the value associated to the edge (x,y).
-    double get_edge_value(Node x, Node y);
+    double get_edge_value(Node& x, Node& y);
     //sets the value associated to the edge (x,y) to v.
-    void set_edge_value (Node x, Node y, double v);
+    void set_edge_value (Node& x, Node& y, double v);
 
 private:
     vector<Node *> nodes;

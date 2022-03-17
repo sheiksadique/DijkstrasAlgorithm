@@ -77,4 +77,20 @@ void Graph::del(Node &x, Node &y) {
     }
 }
 
+int Graph::get_node_value(Node& x) {
+    x.getId();
+}
+
+void Graph::set_node_value(Node &x, int a) {
+    x.setId(a);
+}
+
+double Graph::get_edge_value(Node& x, Node& y) {
+    return x.getEdge(y).length;
+}
+
+void Graph::set_edge_value(Node &x, Node &y, double v) {
+    x.getEdge(y).length = v;
+}
+
 
