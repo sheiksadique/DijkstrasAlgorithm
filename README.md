@@ -7,6 +7,8 @@ This repository implements a graph data structure along with some accompanying c
 Here I choose to implement edge list version of a graph implementaiton as this gives me a chance to explore OOP with C++.
 In addition edge list version could be more efficient with low density graphs.
 
+My PriorityQueue implementation is very inefficient. Ideally I should have used some kind of a tree datastructure but for simplicity I am using a list to store all the elements.
+
 Below is the assignment text from the course.
 
 Dijkstra's Algorithm
