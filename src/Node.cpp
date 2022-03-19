@@ -68,6 +68,7 @@ Edge &Node::getEdge(Node &y) {
     for (auto & edge : edges){
         if (edge.destination == &y) return edge;
     }
+    throw runtime_error("No edge to specified destination was found");
 }
 
 
