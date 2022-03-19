@@ -32,8 +32,8 @@ Graph genRandomGraph(int size, double density, double dmin, double dmax){
 }
 
 int main() {
-    Graph g = genRandomGraph(10, 0.1, 0, 1);
+    Graph g = genRandomGraph(50, 0.1, 1.0, 10.0);
     int maxEdges = (g.V()*(g.V()-1))/2;
-    cout << "No. of edges: " << g.E()  << "/" << maxEdges << endl;
+    cout << "No. of edges: " << g.E()  << "/" << maxEdges << " = " << 1.0*g.E()/maxEdges << endl;
     return 0;
 }

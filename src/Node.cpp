@@ -65,8 +65,8 @@ const list<Edge> &Node::getEdges() const {
 }
 
 Edge &Node::getEdge(Node &y) {
-    for (Edge e: edges){
-        if (e.destination == &y) return e;
+    for (auto & edge : edges){
+        if (edge.destination == &y) return edge;
     }
 }
 

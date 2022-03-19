@@ -78,7 +78,7 @@ void Graph::del(Node &x, Node &y) {
 }
 
 int Graph::get_node_value(Node& x) {
-    x.getId();
+    return x.getId();
 }
 
 void Graph::set_node_value(Node &x, int a) {
