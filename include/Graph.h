@@ -8,14 +8,13 @@
 #include <vector>
 #include "Node.h"
 
-using namespace std;
 
 class Graph {
 public:
     // Constructors
     Graph();
     explicit Graph(int n);
-    explicit Graph(vector<Node *> &nodes);
+    explicit Graph(std::vector<Node *> &nodes);
 
 
     // Destructor
@@ -30,7 +29,7 @@ public:
     // Tests whether there is an edge from node x to node y
     bool adjacent(Node x, Node y);
     // Lists all nodes y such that there is an edge from x to y
-    list<Node *> neighbors(const Node& x);
+    std::list<Node *> neighbors(const Node& x);
     // adds to G the edge from x to y, if it is not there.
     void add (Node& x, Node& y);
     //removes the edge from x to y, if it is there.
@@ -45,7 +44,7 @@ public:
     void set_edge_value (Node& x, Node& y, double v);
 
 private:
-    vector<Node *> nodes;
+    std::vector<Node *> nodes;
     bool bidirectional=true;
 };
 

@@ -3,6 +3,7 @@
 //
 
 #include "Graph.h"
+using namespace std;
 
 // Default constructor
 Graph::Graph() {}

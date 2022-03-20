@@ -9,21 +9,20 @@
 #include <ostream>
 #include "Edge.h"
 
-using namespace std;
 
 class Node {
 public:
     // Constructors
     Node();
     Node(int id);
-    Node(int id, list<Edge> &edges);
+    Node(int id, std::list<Edge> &edges);
 
     // Accessors for value of a Node
     int getId() const;
     void setId(int id);
 
     // Get the list of all Edges of this Node
-    const list<Edge> &getEdges() const;
+    const std::list<Edge> &getEdges() const;
 
     // Add an edge
     void add(Node& y);
@@ -35,14 +34,14 @@ public:
     Edge & getEdge(Node& y);
 
     // String representation of the object
-    friend ostream &operator<<(ostream &os, const Node &node);
+    friend std::ostream &operator<<(std::ostream &os, const Node &node);
 
     // Number of edges of this node
     int E();
 
 private:
     int id;
-    list<Edge> edges;
+    std::list<Edge> edges;
 public:
 };
 

@@ -11,13 +11,12 @@
 #include "Graph.h"
 #include "PriorityQueue.h"
 
-typedef pair<int, double> maptype;
 
 class ShortestPath {
 public:
     explicit ShortestPath(Graph &g);
     // Find the shortest path between two nodes
-    list<Edge> path(Node* source, Node* destination);
+    std::list<Edge> path(Node* source, Node* destination);
 
     // Find the distance of the shortest path between two nodes
     double path_size(Node* source, Node* destination);
@@ -27,8 +26,8 @@ public:
 private:
     Graph & graph;
     PriorityQueue<Node *> openset = {};
-    set<Node *> closedset = {};
-    vector<list<Edge>> paths = {};
+    std::set<Node *> closedset = {};
+    std::vector<std::list<Edge>> paths = {};
 
     // One step of the search
     void onestep();

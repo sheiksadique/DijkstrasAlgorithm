@@ -3,6 +3,8 @@
 //
 
 #include "ShortestPath.h"
+using namespace std;
+
 
 ShortestPath::ShortestPath(Graph &g): graph(g) {}
 

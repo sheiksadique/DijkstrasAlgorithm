@@ -2,6 +2,8 @@
 #include "Graph.h"
 #include <random>
 
+using namespace std;
+
 /*
  * Function generates a random graph of a given size and density.
  * The distances are randomly picked within the range (dmin, dmax)
