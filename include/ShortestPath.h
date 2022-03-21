@@ -6,28 +6,28 @@
 #define WEEK3_SHORTESTPATH_H
 
 
-#include <map>
 #include <set>
 #include "Graph.h"
 #include "PriorityQueue.h"
+#include "Tree.h"
 
 
 class ShortestPath {
 public:
     explicit ShortestPath(Graph &g);
     // Find the shortest path between two nodes
-    std::list<Edge> path(Node* source, Node* destination);
+    std::list<Node *> path(int source, int destination);
 
     // Find the distance of the shortest path between two nodes
-    double path_size(Node* source, Node* destination);
+    double pathLength(int source, int destination);
 
     // Reset
     void reset();
 private:
     Graph & graph;
-    PriorityQueue<Node *> openset = {};
-    std::set<Node *> closedset = {};
-    std::vector<std::list<Edge>> paths = {};
+    PriorityQueue<Node *> openSet = {};
+    std::set<Node *> closedSet = {};
+    Tree<Node *> pathTree = {};
 
     // One step of the search
     void onestep();

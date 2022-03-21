@@ -46,22 +46,35 @@ int Graph::E() {
         return sum;
 }
 
-void Graph::add(Node& x, Node& y) {
+void Graph::add(int x, int y) {
+    auto nodeX = at(x);
+    auto nodeY = at(y);
     // Add the edge to source
-    x.add(y);
+    nodeX->add(*nodeY);
     // Repeat the same for the other direction
     if (bidirectional) {
-        y.add(x);
+        nodeY->add(*nodeX);
     }
 }
 
-bool Graph::adjacent(Node x, Node y) {
-    return x.adjacent(y);
+void Graph::del(int x, int y) {
+    auto nodeX = at(x);
+    auto nodeY = at(y);
+    nodeX->del(*nodeY);
+    if (bidirectional) {
+        nodeY->del(*nodeX);
+    }
 }
 
-list<Node *> Graph::neighbors(const Node& x) {
+bool Graph::adjacent(int x, int y) {
+    auto nodeX = at(x);
+    auto nodeY = at(y);
+    return nodeX->adjacent(*nodeY);
+}
+
+list<Node *> Graph::neighbors(int x) {
     list<Node *> nodes;
-    for (auto edge: x.getEdges()){
+    for (auto edge: at(x)->getEdges()){
         nodes.push_back(edge.destination);
     }
     return nodes;
@@ -71,27 +84,28 @@ Node * Graph::at(const int index) {
     return nodes.at(index);
 }
 
-void Graph::del(Node &x, Node &y) {
-    x.del(y);
-    if (bidirectional) {
-        y.del(x);
-    }
-}
 
-int Graph::get_node_value(Node& x) {
+int Graph::getNodeValue(Node& x) {
     return x.getId();
 }
 
-void Graph::set_node_value(Node &x, int a) {
+void Graph::setNodeValue(Node &x, int a) {
     x.setId(a);
 }
 
-double Graph::get_edge_value(Node& x, Node& y) {
-    return x.getEdge(y).length;
+double Graph::getEdgeValue(int x, int y) {
+    auto nodeX = at(x);
+    auto nodeY = at(y);
+    return nodeX->getEdge(*nodeY).length;
 }
 
-void Graph::set_edge_value(Node &x, Node &y, double v) {
-    x.getEdge(y).length = v;
+void Graph::setEdgeValue(int x, int y, double v) {
+    auto nodeX = at(x);
+    auto nodeY = at(y);
+    nodeX->getEdge(*nodeY).length = v;
+    if (bidirectional){
+        nodeY->getEdge(*nodeX).length = v;
+    }
 }
 
 

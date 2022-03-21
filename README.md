@@ -70,13 +70,13 @@ add (G, x, y): adds to G the edge from x to y, if it is not there.
 
 delete (G, x, y): removes the edge from x to y, if it is there.
 
-get_node_value (G, x): returns the value associated with the node x.
+getNodeValue (G, x): returns the value associated with the node x.
 
-set_node_value( G, x, a): sets the value associated with the node x to a.
+setNodeValue( G, x, a): sets the value associated with the node x to a.
 
-get_edge_value( G, x, y): returns the value associated to the edge (x,y).
+getEdgeValue( G, x, y): returns the value associated to the edge (x,y).
 
-set_edge_value (G, x, y, v): sets the value associated to the edge (x,y) to v.
+setEdgeValue (G, x, y, v): sets the value associated to the edge (x,y) to v.
 
 One important consideration for the Graph class is how to represent the graph as a member ADT. Two basic implementations are generally considered: adjacency list and adjacency matrix depending on the relative edge density. For sparse graphs, the list approach is typically more efficient, but for dense graphs, the matrix approach can be more efficient (reference an Algorithm’s source for space and time analysis). Note in some cases such as add(G, x, y) you may also want to have the edge carry along its cost. Another approach could be to use (x, y) to index a cost stored in an associated array or map.
 
@@ -106,7 +106,7 @@ vertices(List): list of vertices in G(V,E).
 
 path(u, w): find shortest path between u-w and returns the sequence of vertices representing shorest path u-v1-v2-…-vn-w.
 
-path_size(u, w): return the path cost associated with the shortest path.
+pathLength(u, w): return the path cost associated with the shortest path.
 
 The class implementing your Monte Carlo simulation is the workflow manager for this assignment, but other helper classes may be necessary depending on your particular implementation
 

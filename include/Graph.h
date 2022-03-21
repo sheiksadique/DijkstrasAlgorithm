@@ -24,24 +24,24 @@ public:
     int V();
     // Returns the number of edges in the graph
     int E();
+    // adds to G the edge from x to y, if it is not there.
+    void add (int x, int y);
+    //removes the edge from x to y, if it is there.
+    void del (int x, int y);
     // accessor
     Node * at(const int index);
     // Tests whether there is an edge from node x to node y
-    bool adjacent(Node x, Node y);
+    bool adjacent(int x, int y);
     // Lists all nodes y such that there is an edge from x to y
-    std::list<Node *> neighbors(const Node& x);
-    // adds to G the edge from x to y, if it is not there.
-    void add (Node& x, Node& y);
-    //removes the edge from x to y, if it is there.
-    void del (Node& x, Node& y);
+    std::list<Node *> neighbors(int x);
     // returns the value associated with the node x.
-    int get_node_value (Node& x);
+    int getNodeValue (Node& x);
     //sets the value associated with the node x to a.
-    void set_node_value(Node& x, int a);
+    void setNodeValue(Node& x, int a);
     // returns the value associated to the edge (x,y).
-    double get_edge_value(Node& x, Node& y);
+    double getEdgeValue(int x, int y);
     //sets the value associated to the edge (x,y) to v.
-    void set_edge_value (Node& x, Node& y, double v);
+    void setEdgeValue (int x, int y, double v);
 
 private:
     std::vector<Node *> nodes;

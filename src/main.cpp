@@ -22,11 +22,9 @@ Graph genRandomGraph(int size, double density, double dmin, double dmax){
         for (int j=i+1; j<size; j++) {
             // Generate edge probabilistically
             if (prob_distribution(engine)<density){
-                Node *a = g.at(i);
-                Node *b = g.at(j);
-                g.add(*a, *b);
+                g.add(i, j);
                 // Set random weight to the edge
-                g.set_edge_value(*a, *b, distance_distribution(engine));
+                g.setEdgeValue(i, j, distance_distribution(engine));
             }
         }
     }
