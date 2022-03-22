@@ -7,21 +7,26 @@
 #include <iostream>
 using namespace std;
 
-
+/*
+ * Constructor
+ */
 ShortestPath::ShortestPath(Graph &g): graph(g) {}
 
 
-
+/*
+ * Compute and return the shortest path length between two nodes in a graph.
+ */
 double ShortestPath::pathLength(int source, int destination) {
-    auto destinationNode = graph.at(destination);
     double distance = 0;
+    // Find the shortest path
     auto pathNodes = path(source, destination);
     // Sum up all the lengths of the edges along the shortest path
     for (auto it=pathNodes.begin(); it!=pathNodes.end(); it++){
         auto currentNode = *it;
         // If we are not already at the destination find the distance to the next node.
-        if (currentNode != destinationNode) {
+        if (currentNode->getId() != destination) {
             auto nextNode = *next(it);
+            // Find the edge between the current node and next
             Edge e = currentNode->getEdge(*nextNode);
             distance = distance + e.length;
         }
@@ -29,14 +34,16 @@ double ShortestPath::pathLength(int source, int destination) {
     return distance;
 }
 
+
+/*
+ * Find the shortest path between two nodes in a graph
+ */
 list<Node *> ShortestPath::path(int i, int j) {
     auto source = graph.at(i);
     auto destination = graph.at(j);
-    // // Reset the algorithm
-    //reset();
-    // // Add source node to the open set with distance 0
-    //openSet.insert(source, 0.0, {source});
+    // If the source is the same as before, maintain the state of the algorithm
     if (source != startingNode){
+        // Reset otherwise
         reset();
         startingNode = source;
         // Add source node to the open set with distance 0
@@ -66,6 +73,9 @@ list<Node *> ShortestPath::path(int i, int j) {
 }
 
 
+/*
+ * Perform one step of edge search from the highest priority node in the openSet
+ */
 void ShortestPath::oneStep() {
     // Get the element with the shortest path in the open set
     auto top = openSet.pop();
@@ -103,12 +113,19 @@ void ShortestPath::oneStep() {
 
 }
 
+/*
+ * Reset the state of the algorithm
+ */
 void ShortestPath::reset() {
     startingNode = nullptr;
     openSet = {};
     closedSet.clear();
 }
 
+
+/*
+ * Check if a given node is in the closed set
+ */
 bool ShortestPath::isInClosedSet(const int nodeIdx) {
     for (const auto & it : closedSet){
         if (it.data == graph.at(nodeIdx)) return true;
@@ -116,6 +133,10 @@ bool ShortestPath::isInClosedSet(const int nodeIdx) {
     return false;
 }
 
+
+/*
+ * Get a node from the closedSet
+ */
 const QueueElement<Node *> &ShortestPath::getFromClosedSet(int nodeIdx) {
     for (const auto & it : closedSet){
         if (it.data == graph.at(nodeIdx)) return it;

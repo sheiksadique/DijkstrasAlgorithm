@@ -14,7 +14,9 @@
 
 class ShortestPath {
 public:
+    // Constructor
     explicit ShortestPath(Graph &g);
+
     // Find the shortest path between two nodes
     std::list<Node *> path(int source, int destination);
 
@@ -22,16 +24,19 @@ public:
     double pathLength(int source, int destination);
 
     bool isInClosedSet(int source);
-    // Reset
+
+    // Reset the state of the algorithm
     void reset();
 private:
     Graph & graph;
     PriorityQueue<Node *> openSet = {};
     std::set<QueueElement<Node *>> closedSet = {};
-    const QueueElement<Node *> & getFromClosedSet(int nodeIdx);
     Node * startingNode;
 
-    // One step of the search
+    // Check if a given node is in the closed set
+    const QueueElement<Node *> & getFromClosedSet(int nodeIdx);
+
+    // Perform one step of edge search from the highest priority node in the openSet
     void oneStep();
 };
 
