@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <chrono>
 #include "Graph.h"
 #include "ShortestPath.h"
 
@@ -40,12 +41,39 @@ Graph genRandomGraph(int size, double density, double dmin, double dmax){
     return g;
 }
 
+/*
+ * Compute average path between any two nodes in a graph
+ * excluding self connection.
+ */
+double averagePathLength(Graph & g){
+    double sum=0, length;
+    int count = 0;
+    ShortestPath sp {g};
+    /*
+     * Since the graph is bidirectional,
+     * it is sufficient to loop over half the matrix
+     */
+    for(int i=0;i<g.V()-1;i++)
+        for (int j=i+1;j<g.V();j++){
+            count++;
+            length = sp.pathLength(i, j);
+            sum = sum + length;
+        }
+    cout << "Average path length for a graph of size " << g.V() << " : " << sum/count << endl;
+    return sum/count;
+
+}
+
 int main() {
     Graph g = genRandomGraph(50, 0.1, 1.0, 10.0);
     int maxEdges = (g.V()*(g.V()-1))/2;
     cout << "No. of edges: " << g.E()  << "/" << maxEdges << " = " << 1.0*g.E()/maxEdges << endl;
 
-    ShortestPath sp {g};
+    auto start = chrono::high_resolution_clock::now();
+    averagePathLength(g);
+    auto stop = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(stop-start);
+    cout << "Total run-time: " << duration.count() << "us" << endl;
 
     return 0;
 }
