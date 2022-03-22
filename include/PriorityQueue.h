@@ -1,6 +1,11 @@
-//
-// Created by Sadique Sheik on 15.03.22.
-//
+/*
+ * Created by Sadique Sheik on 15.03.22.
+ *
+ * This is an inefficient implementation of PriorityQueue using lists.
+ * This was done purely to save some implementation time.
+ *
+ * In principle a heap data structure should have been used to represent a priority queue.
+ */
 
 #ifndef WEEK3_PRIORITYQUEUE_H
 #define WEEK3_PRIORITYQUEUE_H
@@ -11,12 +16,19 @@
 template <typename T>
 class PriorityQueue {
 public:
+    // Current size of the queue
     int size();
+    // Check if a value is present in the queue
     bool contains(T item);
+    // Check the priority of an element
     double getPriority(T item);
+    // Insert an element in the queue
     void insert(T item, double priority, std::list<T> path);
+    // Update the priority of an element in the queue
     void updatePriority(T item, double priority, std::list<T> path);
+    // Return the element with the highest priority
     QueueElement<T> & top();
+    // Remove the highest priority element from the queue.
     QueueElement<T> pop();
 
 private:
@@ -24,11 +36,13 @@ private:
 };
 
 
+// Current size of the queue
 template<typename T>
 int PriorityQueue<T>::size() {
     return elements.size();
 }
 
+// Check if a value is present in the queue
 template<typename T>
 bool PriorityQueue<T>::contains(T item) {
     for (QueueElement<T> elem: elements){
@@ -37,6 +51,8 @@ bool PriorityQueue<T>::contains(T item) {
     return false;
 }
 
+
+// Check the priority of an element
 template<typename T>
 double PriorityQueue<T>::getPriority(T item) {
     for (QueueElement<T> elem: elements){
@@ -47,6 +63,8 @@ double PriorityQueue<T>::getPriority(T item) {
     throw std::runtime_error("Item not found");
 }
 
+
+// Insert an element in the queue
 template<typename T>
 void PriorityQueue<T>::insert(T item, double priority, std::list<T> path) {
     for (auto it=elements.begin(); it!=elements.end(); it++){
@@ -60,6 +78,8 @@ void PriorityQueue<T>::insert(T item, double priority, std::list<T> path) {
     elements.push_back({item, priority, path});
 }
 
+
+// Update the priority of an element in the queue
 template<typename T>
 void PriorityQueue<T>::updatePriority(T item, double priority, std::list<T> path) {
     // Erase the element from the queue
@@ -73,12 +93,15 @@ void PriorityQueue<T>::updatePriority(T item, double priority, std::list<T> path
     insert(item, priority, path);
 }
 
+
+// Return the element with the highest priority
 template<typename T>
 QueueElement<T> &PriorityQueue<T>::top() {
     if (elements.empty()) throw std::out_of_range("top: Priority queue is empty!");
     return elements.front();
 }
 
+// Remove the highest priority element from the queue.
 template<typename T>
 QueueElement<T> PriorityQueue<T>::pop() {
     if (elements.empty()) throw std::out_of_range("pop: Priority queue is empty!");

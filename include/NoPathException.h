@@ -8,6 +8,9 @@
 #include <exception>
 #include <sstream>
 
+/*
+ * Custom exception to identify when the graph is not connected.
+ */
 class NoPathException : public std::exception {
 public:
     const char * what() const noexcept override {
