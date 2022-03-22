@@ -4,9 +4,12 @@ Context
 This is an assignment project from Coursera C++ course.
 This repository implements a graph data structure along with some accompanying classes.
 
-Here I choose to implement edge list version of a graph implementaiton as this gives me a chance to explore OOP with C++.
+Here I choose to implement edge list version of a graph implementation as this gives me a chance to explore OOP with C++.
 In addition, edge list version could be more efficient with low density graphs.
+First thing I learned in the process was about friend methods in classes, that are very handy to override operators.
+Secondly, I learned that template class definitions cannot be split into a header file and source file. Otherwise the linker fails.
 
+I also learned to time my code using the chrono library.
 My PriorityQueue implementation is very inefficient. Ideally I should have used some kind of a tree/heap datastructure but for simplicity I am using a list to store all the elements.
 I chose to implement the PriorityQueue using templates as this is a generic class that could be potentially used for other types of data structures unrelated to this assignment.
 

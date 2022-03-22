@@ -1,3 +1,8 @@
+/*
+ * Author: Sadique Sheik
+ * Week 3 assignment. Dijkstra's algorithm to find the shortest path in a graph.
+ */
+
 #include <iostream>
 #include <random>
 #include <chrono>
@@ -71,8 +76,9 @@ double averagePathLength(Graph & g){
 
 }
 
-int main() {
-    Graph g = genRandomGraph(50, 0.1, 1.0, 10.0);
+
+void assignment(double density){
+    Graph g = genRandomGraph(50, density, 1.0, 10.0);
     int maxEdges = (g.V()*(g.V()-1))/2;
     cout << "No. of edges: " << g.E()  << "/" << maxEdges << " = " << 1.0*g.E()/maxEdges << endl;
 
@@ -81,6 +87,10 @@ int main() {
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
     cout << "Total run-time: " << duration.count() << "ms" << endl;
+}
 
+int main() {
+    assignment(0.2);
+    assignment(0.4);
     return 0;
 }
