@@ -3,6 +3,7 @@
 //
 
 #include "ShortestPath.h"
+#include "NoPathException.h"
 #include <iostream>
 using namespace std;
 
@@ -43,13 +44,17 @@ list<Node *> ShortestPath::path(int i, int j) {
 
     //}
     while (openSet.size() != 0){
-        onestep();
+        // Check top element
         auto top = openSet.top();
         if (top.data == destination) {
+            closedSet.insert(top.data);
+            // cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
             return top.path; // Shortest path found
+        } else {
+            onestep();
         }
     }
-    throw std::runtime_error("No path found");
+    throw NoPathException {i, j};
 }
 
 
@@ -61,7 +66,7 @@ void ShortestPath::onestep() {
     auto startPath = top.path;
     // Add the node to the closed set
     closedSet.insert(source);
-    cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
+    // cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
 
     // Iterate over neighbors
     for (Edge e: source->getEdges()){
@@ -83,7 +88,7 @@ void ShortestPath::onestep() {
                 // If destination node not in the set, add it
                 // The length should be sum of current + edge length
                 openSet.insert(e.destination, newDistance, newPath);
-                cout << "Adding node " << e.destination->getId() << " to openSet." << endl;
+                // cout << "Adding node " << e.destination->getId() << " to openSet." << endl;
             }
         }
     }

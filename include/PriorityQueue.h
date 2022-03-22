@@ -75,14 +75,16 @@ void PriorityQueue<T>::updatePriority(T item, double priority, std::list<T> path
 
 template<typename T>
 QueueElement<T> &PriorityQueue<T>::top() {
+    if (elements.empty()) throw std::out_of_range("top: Priority queue is empty!");
     return elements.front();
 }
 
 template<typename T>
 QueueElement<T> PriorityQueue<T>::pop() {
-    QueueElement<T> top = elements.front();
+    if (elements.empty()) throw std::out_of_range("pop: Priority queue is empty!");
+    QueueElement<T> topElem = elements.front();
     elements.pop_front();
-    return top;
+    return topElem;
 }
 
 #endif //WEEK3_PRIORITYQUEUE_H

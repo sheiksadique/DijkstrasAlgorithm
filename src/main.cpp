@@ -3,6 +3,7 @@
 #include <chrono>
 #include "Graph.h"
 #include "ShortestPath.h"
+#include "NoPathException.h"
 
 using namespace std;
 
@@ -55,9 +56,15 @@ double averagePathLength(Graph & g){
      */
     for(int i=0;i<g.V()-1;i++)
         for (int j=i+1;j<g.V();j++){
-            count++;
-            length = sp.pathLength(i, j);
-            sum = sum + length;
+            try {
+                length = sp.pathLength(i, j);
+                // Aggregate
+                count++;
+                sum = sum + length;
+            } catch (NoPathException &e) {
+                // If  no path was found, exclude it from mean calculation
+                cout << "No path found between " << e.src << "and " << e.dst << endl;
+            }
         }
     cout << "Average path length for a graph of size " << g.V() << " : " << sum/count << endl;
     return sum/count;
@@ -72,8 +79,8 @@ int main() {
     auto start = chrono::high_resolution_clock::now();
     averagePathLength(g);
     auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(stop-start);
-    cout << "Total run-time: " << duration.count() << "us" << endl;
+    auto duration = chrono::duration_cast<chrono::milliseconds>(stop-start);
+    cout << "Total run-time: " << duration.count() << "ms" << endl;
 
     return 0;
 }
