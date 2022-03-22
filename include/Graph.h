@@ -13,18 +13,18 @@ class Graph {
 public:
     // Constructors
     Graph();
-    explicit Graph(int n);
+    explicit Graph(int n, bool symmetric=true);
     explicit Graph(std::vector<Node *> &nodes);
 
 
     // Destructor
     virtual ~Graph();
 
-    // Returns the number of vertices in the graph
+    // Returns the number of nodes in the graph
     int V();
     // Returns the number of edges in the graph
     int E();
-    // adds to G the edge from x to y, if it is not there.
+    // adds an edge from x to y, if it is not there.
     void add (int x, int y);
     //removes the edge from x to y, if it is there.
     void del (int x, int y);
@@ -45,7 +45,7 @@ public:
 
 private:
     std::vector<Node *> nodes;
-    bool bidirectional=true;
+    bool bidirectional=true;  // If true, the edge between any two nodes is bidirectional
 };
 
 
