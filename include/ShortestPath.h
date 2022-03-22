@@ -28,11 +28,11 @@ private:
     Graph & graph;
     PriorityQueue<Node *> openSet = {};
     std::set<QueueElement<Node *>> closedSet = {};
-
+    const QueueElement<Node *> & getFromClosedSet(int nodeIdx);
     Node * startingNode;
 
     // One step of the search
-    void onestep();
+    void oneStep();
 };
 
 

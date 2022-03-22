@@ -32,17 +32,25 @@ double ShortestPath::pathLength(int source, int destination) {
 list<Node *> ShortestPath::path(int i, int j) {
     auto source = graph.at(i);
     auto destination = graph.at(j);
-    // Reset the algorithm
-    reset();
-    // Add source node to the open set with distance 0
-    openSet.insert(source, 0.0, {source});
-    //if (source != startingNode){
-    //    // Add source node to the open set with distance 0
-    //    openSet.insert(source, 0.0, {source});
-    //} else {
-    //    // If node already in closed set, no need to search
+    // // Reset the algorithm
+    //reset();
+    // // Add source node to the open set with distance 0
+    //openSet.insert(source, 0.0, {source});
+    if (source != startingNode){
+        reset();
+        startingNode = source;
+        // Add source node to the open set with distance 0
+        openSet.insert(source, 0.0, {source});
+    }
 
-    //}
+    /*
+     * If the destination is already in the closed set,
+     * there is no need to search further!
+     * We already have the shortest path
+     */
+    if (isInClosedSet(j))
+        return getFromClosedSet(j).path;
+
     while (openSet.size() != 0){
         // Check top element
         auto top = openSet.top();
@@ -51,14 +59,14 @@ list<Node *> ShortestPath::path(int i, int j) {
             // cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
             return top.path; // Shortest path found
         } else {
-            onestep();
+            oneStep();
         }
     }
     throw NoPathException {i, j};
 }
 
 
-void ShortestPath::onestep() {
+void ShortestPath::oneStep() {
     // Get the element with the shortest path in the open set
     auto top = openSet.pop();
     auto source = top.data;
@@ -96,6 +104,7 @@ void ShortestPath::onestep() {
 }
 
 void ShortestPath::reset() {
+    startingNode = nullptr;
     openSet = {};
     closedSet.clear();
 }
@@ -105,4 +114,11 @@ bool ShortestPath::isInClosedSet(const int nodeIdx) {
         if (it.data == graph.at(nodeIdx)) return true;
     }
     return false;
+}
+
+const QueueElement<Node *> &ShortestPath::getFromClosedSet(int nodeIdx) {
+    for (const auto & it : closedSet){
+        if (it.data == graph.at(nodeIdx)) return it;
+    }
+    throw std::out_of_range("Element not in closed set.");
 }
