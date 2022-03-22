@@ -42,7 +42,6 @@ public:
 private:
     int id;
     std::list<Edge> edges;
-public:
 };
 
 
