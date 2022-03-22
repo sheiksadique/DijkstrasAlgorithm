@@ -1,8 +1,17 @@
 #include <iostream>
-#include "Graph.h"
 #include <random>
+#include "Graph.h"
+#include "ShortestPath.h"
 
 using namespace std;
+
+
+void printPath(list<Node *> path) {
+    cout << "Path found: length: " << path.size() << " ";
+    for (auto n: path) cout << " -> " << n->getId();
+    cout << endl;
+}
+
 
 /*
  * Function generates a random graph of a given size and density.
@@ -35,5 +44,8 @@ int main() {
     Graph g = genRandomGraph(50, 0.1, 1.0, 10.0);
     int maxEdges = (g.V()*(g.V()-1))/2;
     cout << "No. of edges: " << g.E()  << "/" << maxEdges << " = " << 1.0*g.E()/maxEdges << endl;
+
+    ShortestPath sp {g};
+
     return 0;
 }

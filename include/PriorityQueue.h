@@ -14,10 +14,10 @@ public:
     int size();
     bool contains(T item);
     double getPriority(T item);
-    void insert(T item, double priority);
-    void updatePriority(T item, double priority);
+    void insert(T item, double priority, std::list<T> path);
+    void updatePriority(T item, double priority, std::list<T> path);
     QueueElement<T> & top();
-    QueueElement<T> & pop();
+    QueueElement<T> pop();
 
 private:
     std::list<QueueElement<T>> elements; // Pair of elements and their priorities
@@ -48,20 +48,20 @@ double PriorityQueue<T>::getPriority(T item) {
 }
 
 template<typename T>
-void PriorityQueue<T>::insert(T item, double priority) {
+void PriorityQueue<T>::insert(T item, double priority, std::list<T> path) {
     for (auto it=elements.begin(); it!=elements.end(); it++){
         // If the new value has higher priority ie smaller value
         if (priority<(*it).priority){
-            elements.insert(it, {item, priority});
+            elements.insert(it, {item, priority, path});
             return;
         }
     }
     // Reached the end of the list, new element has the least priority
-    elements.push_back({item, priority});
+    elements.push_back({item, priority, path});
 }
 
 template<typename T>
-void PriorityQueue<T>::updatePriority(T item, double priority) {
+void PriorityQueue<T>::updatePriority(T item, double priority, std::list<T> path) {
     // Erase the element from the queue
     for (auto it=elements.begin(); it!=elements.end(); it++){
         if (it->data==item) {
@@ -70,7 +70,7 @@ void PriorityQueue<T>::updatePriority(T item, double priority) {
         }
     }
     // Insert element with new priority
-    insert(item, priority);
+    insert(item, priority, path);
 }
 
 template<typename T>
@@ -79,8 +79,8 @@ QueueElement<T> &PriorityQueue<T>::top() {
 }
 
 template<typename T>
-QueueElement<T> &PriorityQueue<T>::pop() {
-    QueueElement<T> &top = elements.front();
+QueueElement<T> PriorityQueue<T>::pop() {
+    QueueElement<T> top = elements.front();
     elements.pop_front();
     return top;
 }

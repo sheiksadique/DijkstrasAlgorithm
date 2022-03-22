@@ -5,11 +5,14 @@
 #ifndef WEEK3_QUEUEELEMENT_H
 #define WEEK3_QUEUEELEMENT_H
 
+#include <list>
+
 template <typename T>
 class QueueElement {
 public:
     T data;
     double priority;
+    std::list<T> path;
 
     bool operator==(const QueueElement &rhs) const {
         return data == rhs.data;

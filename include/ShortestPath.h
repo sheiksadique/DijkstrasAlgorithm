@@ -27,7 +27,8 @@ private:
     Graph & graph;
     PriorityQueue<Node *> openSet = {};
     std::set<Node *> closedSet = {};
-    Tree<Node *> pathTree = {};
+
+    Node * startingNode;
 
     // One step of the search
     void onestep();

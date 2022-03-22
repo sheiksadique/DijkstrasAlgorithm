@@ -9,6 +9,8 @@ using namespace std;
 
 ShortestPath::ShortestPath(Graph &g): graph(g) {}
 
+
+
 double ShortestPath::pathLength(int source, int destination) {
     auto destinationNode = graph.at(destination);
     double distance = 0;
@@ -29,17 +31,22 @@ double ShortestPath::pathLength(int source, int destination) {
 list<Node *> ShortestPath::path(int i, int j) {
     auto source = graph.at(i);
     auto destination = graph.at(j);
-    // initialize pathTree
-    pathTree = {source, nullptr, {}};
+    // Reset the algorithm
+    reset();
     // Add source node to the open set with distance 0
-    openSet.insert(source, 0.0);
-    cout << "Adding node " << source->getId() << " to openSet." << endl;
+    openSet.insert(source, 0.0, {source});
+    //if (source != startingNode){
+    //    // Add source node to the open set with distance 0
+    //    openSet.insert(source, 0.0, {source});
+    //} else {
+    //    // If node already in closed set, no need to search
+
+    //}
     while (openSet.size() != 0){
         onestep();
         auto top = openSet.top();
         if (top.data == destination) {
-            // Found shortest path
-            return pathTree;
+            return top.path; // Shortest path found
         }
     }
     throw std::runtime_error("No path found");
@@ -47,33 +54,35 @@ list<Node *> ShortestPath::path(int i, int j) {
 
 
 void ShortestPath::onestep() {
-    cout << "Open set size : " << openSet.size() << ". ClosedSet size: "<< closedSet.size() << endl;
     // Get the element with the shortest path in the open set
     auto top = openSet.pop();
-    Node * source = top.data;
-    double startDistance = top.priority;
-
+    auto source = top.data;
+    auto startDistance = top.priority;
+    auto startPath = top.path;
     // Add the node to the closed set
     closedSet.insert(source);
-    cout << "Moving node " << source->getId() << " from open set to closed set." << endl;
+    cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
 
     // Iterate over neighbors
     for (Edge e: source->getEdges()){
         if (closedSet.find(e.destination) != closedSet.end()){
             // Node already explored. Ignore.
         } else {
+            list<Node *> newPath(startPath);
+            newPath.push_back(e.destination);
+            double newDistance = e.length + startDistance;
             if (openSet.contains(e.destination)) {
                 // Check current value and update as required
                 if ((e.length+startDistance) < openSet.getPriority(e.destination)) {
                     // New best path
-                    openSet.updatePriority(e.destination, e.length + startDistance);
+                    openSet.updatePriority(e.destination, newDistance, newPath);
                 } else {
                     // Old path was better. Ignore
                 }
             } else {
                 // If destination node not in the set, add it
                 // The length should be sum of current + edge length
-                openSet.insert(e.destination, startDistance + e.length);
+                openSet.insert(e.destination, newDistance, newPath);
                 cout << "Adding node " << e.destination->getId() << " to openSet." << endl;
             }
         }

@@ -91,7 +91,6 @@ void testShortestPath3Node() {
     ShortestPath sp {g};
     assert(sp.pathLength(0, 2) == 2);
     assert(sp.pathLength(2, 0) == 2);
-    cout << "............" << endl;
     assert(sp.pathLength(1, 2) == 1);
     assert(sp.pathLength(2, 1) == 1);
     assert(sp.pathLength(0, 1) == 1);
