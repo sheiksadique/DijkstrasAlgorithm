@@ -5,9 +5,24 @@ This is an assignment project from Coursera C++ course.
 This repository implements a graph data structure along with some accompanying classes.
 
 Here I choose to implement edge list version of a graph implementaiton as this gives me a chance to explore OOP with C++.
-In addition edge list version could be more efficient with low density graphs.
+In addition, edge list version could be more efficient with low density graphs.
 
-My PriorityQueue implementation is very inefficient. Ideally I should have used some kind of a tree datastructure but for simplicity I am using a list to store all the elements.
+My PriorityQueue implementation is very inefficient. Ideally I should have used some kind of a tree/heap datastructure but for simplicity I am using a list to store all the elements.
+I chose to implement the PriorityQueue using templates as this is a generic class that could be potentially used for other types of data structures unrelated to this assignment.
+
+The ShortestPath class is implemented in a stateful manner such that the graph is retained until the source node changes.
+This implementation enables reuse of computations and makes the algorithm particularly efficient to compute distances between all node pairs. 
+
+In addition, since the chosen graph is bidirectional, we only need to compute the distance a pair of two nodes x and y without computing the distance between y and x.
+This effectively halves the total number of computations required.
+
+This project is complex with several classes and data structures. 
+In order to test that my implementations are correct during the development phase, I also write a set of test functions that execute smaller parts of code and checks their output agains known/expected outputs.
+This helped me immensely in testing and debugging the code.
+Another aspect that I learned in the process was error handling with try catch blocks and custom exceptions.
+This was also very useful to identify and prevent the code from failing if a pair of nodes in the graph are not connected.
+
+All of my code is hosted on github at https://github.com/sheiksadique/DijkstrasAlgorithm and is available to review and comment.
 
 Below is the assignment text from the course.
 

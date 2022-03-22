@@ -9,11 +9,13 @@
 
 using namespace std;
 
+// Check if a single node can be constructed
 void generateSingleNode(){
     Node n {0};
     std::cout << n;
 }
 
+// Generate a single edge
 void generateSingleEdge(){
     // Note that this method is not complete because the nodes themselves do not have a reference to this edge.
     Node a {0};
@@ -22,7 +24,7 @@ void generateSingleEdge(){
     std::cout << e << endl;
 }
 
-
+// Check if two nodes are adjacent to each other
 void checkAdjacentNode(){
     Node a {0};
     Node b {1};
@@ -32,6 +34,7 @@ void checkAdjacentNode(){
     assert(!a.adjacent(c));
 }
 
+// Generate a complete graph and test against the total number of edges
 void generateCompleteGraph(int size){
     Graph g {size}; // Bidirectional graph
     for (int i=0; i<size; i++) {
@@ -45,7 +48,7 @@ void generateCompleteGraph(int size){
     cout << "No. of edges: " << g.E() << endl;
 }
 
-
+// Test that edge deletion works as expected
 void testEdgeDeletion(int size){
     // Generate a complete graph
     Graph g {size}; // Bidirectional graph
@@ -62,6 +65,7 @@ void testEdgeDeletion(int size){
     cout << "No. of edges after deleting: " << g.E() << endl;
 }
 
+// Test shortest path algorithm on a graph with two nodes
 void testShortestPath2Node(){
     Graph g = Graph(2);
     assert (g.E() == 0);
@@ -79,6 +83,8 @@ void testShortestPath2Node(){
     cout << "............" << endl;
 }
 
+
+// Test shortest path algorithm on a graph with 3 nodes
 void testShortestPath3Node() {
     Graph g = Graph(3);
     g.add(0, 1);
@@ -97,6 +103,7 @@ void testShortestPath3Node() {
     assert(sp.pathLength(1, 0) == 1);
 }
 
+// Run all test functions defined above.
 int main(){
     std::cout << "Running tests" << std::endl;
     generateSingleNode();

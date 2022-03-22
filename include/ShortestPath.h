@@ -9,7 +9,6 @@
 #include <set>
 #include "Graph.h"
 #include "PriorityQueue.h"
-#include "Tree.h"
 
 
 class ShortestPath {
