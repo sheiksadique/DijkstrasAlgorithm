@@ -26,6 +26,11 @@ public:
         // The higher the priority, the smaller the value/distance
         return priority < rhs.priority;
     }
+
+    bool operator<(const QueueElement rhs) const {
+        // The higher the priority, the smaller the value/distance
+        return priority > rhs.priority;
+    }
 };
 
 

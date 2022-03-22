@@ -47,7 +47,7 @@ list<Node *> ShortestPath::path(int i, int j) {
         // Check top element
         auto top = openSet.top();
         if (top.data == destination) {
-            closedSet.insert(top.data);
+            closedSet.insert(top);
             // cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
             return top.path; // Shortest path found
         } else {
@@ -65,12 +65,12 @@ void ShortestPath::onestep() {
     auto startDistance = top.priority;
     auto startPath = top.path;
     // Add the node to the closed set
-    closedSet.insert(source);
+    closedSet.insert(top);
     // cout << "Moving node " << source->getId() << " from openSet to closedSet." << endl;
 
     // Iterate over neighbors
     for (Edge e: source->getEdges()){
-        if (closedSet.find(e.destination) != closedSet.end()){
+        if (isInClosedSet(e.destination->getId())){
             // Node already explored. Ignore.
         } else {
             list<Node *> newPath(startPath);
@@ -98,4 +98,11 @@ void ShortestPath::onestep() {
 void ShortestPath::reset() {
     openSet = {};
     closedSet.clear();
+}
+
+bool ShortestPath::isInClosedSet(const int nodeIdx) {
+    for (const auto & it : closedSet){
+        if (it.data == graph.at(nodeIdx)) return true;
+    }
+    return false;
 }

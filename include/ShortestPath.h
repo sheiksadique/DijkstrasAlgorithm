@@ -21,12 +21,13 @@ public:
     // Find the distance of the shortest path between two nodes
     double pathLength(int source, int destination);
 
+    bool isInClosedSet(int source);
     // Reset
     void reset();
 private:
     Graph & graph;
     PriorityQueue<Node *> openSet = {};
-    std::set<Node *> closedSet = {};
+    std::set<QueueElement<Node *>> closedSet = {};
 
     Node * startingNode;
 
