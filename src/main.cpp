@@ -78,7 +78,7 @@ double averagePathLength(Graph & g){
 }
 
 
-void assignment(double density){
+void assignmentWeek2(double density){
     Graph g = genRandomGraph(50, density, 1.0, 10.0);
     int maxEdges = (g.V()*(g.V()-1))/2;
     cout << "No. of edges: " << g.E()  << "/" << maxEdges << " = " << 1.0*g.E()/maxEdges << endl;
@@ -95,8 +95,8 @@ void assignment(double density){
 
 int main() {
     // Assignment week 2
-    // assignment(0.2);
-    // assignment(0.4);
+    // assignmentWeek2(0.2);
+    // assignmentWeek2(0.4);
     auto g = Graph("../data/Homework3_SampleTestData_mst_data.txt");
     return 0;
 }
