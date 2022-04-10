@@ -3,6 +3,8 @@
 //
 
 #include "Graph.h"
+#include <fstream>
+#include <iostream>
 using namespace std;
 
 // Default constructor
@@ -125,6 +127,31 @@ void Graph::setEdgeValue(int x, int y, double v) {
     if (bidirectional){
         nodeY->getEdge(*nodeX).length = v;
     }
+}
+
+Graph::Graph(const std::string& filename) {
+    string line;
+    ifstream graph_data_file(filename);
+    std::cout << filename;
+    int node_size, source, destination, cost;
+    graph_data_file >> node_size;
+    // Ideally i would like to call the other constructor here, but not sure how
+    nodes = vector<Node *>(node_size);
+    for (int i=0; i<nodes.size(); i++){
+        // Initialize each node with an id
+        nodes.at(i) = new Node(i);
+    }
+    std::cout << "Graph size of " << node_size << " is being read from file" << endl;
+    while (graph_data_file.good()){
+        // Read data from each line
+        graph_data_file >> source;
+        graph_data_file >> destination;
+        graph_data_file >> cost;
+        // Add corresponding edge to the graph
+        add(source, destination);
+        setEdgeValue(source, destination, cost);
+    }
+    graph_data_file.close();
 }
 
 

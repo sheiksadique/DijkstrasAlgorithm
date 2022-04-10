@@ -15,6 +15,7 @@ public:
     Graph();
     explicit Graph(int n, bool symmetric=true);
     explicit Graph(std::vector<Node *> &nodes);
+    explicit Graph(const std::string& filename);
 
 
     // Destructor

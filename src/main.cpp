@@ -4,6 +4,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include <random>
 #include <chrono>
 #include "Graph.h"
@@ -89,8 +90,13 @@ void assignment(double density){
     cout << "Total run-time: " << duration.count() << "ms" << endl;
 }
 
+
+
+
 int main() {
-    assignment(0.2);
-    assignment(0.4);
+    // Assignment week 2
+    // assignment(0.2);
+    // assignment(0.4);
+    auto g = Graph("../data/Homework3_SampleTestData_mst_data.txt");
     return 0;
 }
