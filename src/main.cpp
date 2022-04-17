@@ -10,6 +10,7 @@
 #include "Graph.h"
 #include "ShortestPath.h"
 #include "NoPathException.h"
+#include "MinimumSpanningTree.h"
 
 using namespace std;
 
@@ -91,12 +92,34 @@ void assignmentWeek2(double density){
 }
 
 
+void assignmentWeek4() {
+    // Load the graph from file
+    Graph g {"../data/Homework3_SampleTestData_mst_data.txt"};
+    cout << "The graph has " << g.V() << " nodes" << endl;
+    averagePathLength(g);
+
+    // Compute the minimum spanning tree
+    MinimumSpanningTree mst {g};
+    auto edges = mst.compute();
+    double cost = mst.getCost();
+
+    // Check that the length of MST == (V -1)
+    cout << "The length of MST is " << edges.size() << endl;
+    cout << "It should ideally be " << g.V() - 1 << endl;
+
+    cout << "The minimum spanning tree is : " << endl;
+    for (auto e: edges) {
+        cout << e << endl;
+    }
+
+    cout << "The MST cost for the given graph is " << cost << endl;
+}
 
 
 int main() {
     // Assignment week 2
     // assignmentWeek2(0.2);
     // assignmentWeek2(0.4);
-    auto g = Graph("../data/Homework3_SampleTestData_mst_data.txt");
+    assignmentWeek4();
     return 0;
 }
