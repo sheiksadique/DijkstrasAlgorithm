@@ -10,22 +10,35 @@
 #include <vector>
 #include <set>
 
+/*
+ * MinimumSpanningTree class
+ * Implements the Prim's algorithm as described in the lecture.
+ * https://en.wikipedia.org/wiki/Prim%27s_algorithm
+ *
+ */
 class MinimumSpanningTree {
 public:
+    // Constructor
     explicit MinimumSpanningTree(const Graph &g);
 
+    // Compute the minimum spanning tree for the given graph
     std::vector<Edge> compute();
+
+    // Get the cost of MST
     double getCost() const;
 
+    // Add a potential edge
     void addPotentialEdge(Edge edge);
-    Edge getNextShortestEdge();
 
-    void printEdgeList();
+    // Get the next shortest edge to form the tree
+    Edge getNextShortestEdge();
 
     /*
      * Debug method to print the number of explored nodes and number of potential edges
      */
     void printState();
+    // Print all potential edges
+    void printEdgeList();
 
     void reset();
 private:

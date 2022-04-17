@@ -109,15 +109,15 @@ void testMstPriorityQueue(){
     Graph g {4};
     MinimumSpanningTree mst {g};
 
-    Edge e1 {0, 0, 1};
-    Edge e2 {0, 0, 3.5};
-    Edge e3 {0, 0, 0.1};
+    Edge e1 {g.at(0), g.at(1), 1.0};
+    Edge e2 {g.at(0), g.at(1), 3.5};
+    Edge e3 {g.at(0), g.at(1), 0.1};
 
-    mst.addPotentialEdge(& e1);
+    mst.addPotentialEdge(e1);
     mst.printEdgeList();
-    mst.addPotentialEdge(& e2);
+    mst.addPotentialEdge(e2);
     mst.printEdgeList();
-    mst.addPotentialEdge(& e3);
+    mst.addPotentialEdge(e3);
     mst.printEdgeList();
 
     mst.getNextShortestEdge();
@@ -127,6 +127,7 @@ void testMstPriorityQueue(){
 
 // Run all test functions defined above.
 int main(){
+    /*
     std::cout << "Running tests" << std::endl;
     generateSingleNode();
     generateSingleEdge();
@@ -140,6 +141,6 @@ int main(){
     testShortestPath2Node();
 
     testShortestPath3Node();
-
+    */
     testMstPriorityQueue();
 }

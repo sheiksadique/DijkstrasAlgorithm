@@ -126,6 +126,10 @@ void MinimumSpanningTree::reset() {
     potentialEdges = {};
 }
 
+
+/*
+ * Print current internal state of the MST
+ */
 void MinimumSpanningTree::printState() {
     std::cout << "Num. explored nodes: " << exploredNodes.size();
     std::cout << " Num. potential edges: " << potentialEdges.size() << std::endl;
