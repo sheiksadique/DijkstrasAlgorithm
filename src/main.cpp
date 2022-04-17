@@ -1,6 +1,7 @@
 /*
  * Author: Sadique Sheik
  * Week 3 assignment. Dijkstra's algorithm to find the shortest path in a graph.
+ * Week 4 assignment. Load a graph from file and find the minimum spanning tree.
  */
 
 #include <iostream>

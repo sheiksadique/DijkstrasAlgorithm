@@ -44,3 +44,28 @@ Process finished with exit code 0
 ```
 
 All the source code for this assignment is developed on top of the data structures from the previous assignment and can be found on the github page:
+https://github.com/sheiksadique/DijkstrasAlgorithm
+
+I am only adding the main file and the MinimumSpanningTree class header for brevity in this text file.
+
+```c++
+// main.cpp
+/*
+ * Author: Sadique Sheik
+ * Week 3 assignment. Dijkstra's algorithm to find the shortest path in a graph.
+ */
+
+#include <iostream>
+#include <fstream>
+#include <random>
+#include <chrono>
+#include "Graph.h"
+#include "ShortestPath.h"
+#include "NoPathException.h"
+#include "MinimumSpanningTree.h"
+
+using namespace std;
+
+
+
+```
